@@ -22,9 +22,9 @@ app.post('/generate-image', async (req, res) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          inputs: {
-            image: imageUrl,
-            prompt: "make this image scary"
+          inputs: imageUrl,
+          parameters: {
+            prompt: 'make this image scary',
           },
         }),
       }
