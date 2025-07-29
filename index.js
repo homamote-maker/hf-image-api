@@ -1,3 +1,5 @@
+require('dotenv').config(); // Load .env variables
+
 const express = require('express');
 const fetch = require('node-fetch');
 const app = express();
@@ -16,7 +18,7 @@ app.post('/generate-image', async (req, res) => {
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer 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`,
+          Authorization: `Bearer ${process.env.HF_API_KEY}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
