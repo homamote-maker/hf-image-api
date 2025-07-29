@@ -16,11 +16,14 @@ app.post('/generate-image', async (req, res) => {
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${process.env.HF_API_KEY}`,
+          Authorization: `Bearer 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`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          inputs: imageUrl,
+          inputs: {
+            image: imageUrl,
+            prompt: "make this image scary"
+          },
         }),
       }
     );
