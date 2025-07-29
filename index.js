@@ -4,6 +4,11 @@ const fetch = require('node-fetch');
 const app = express();
 app.use(express.json());
 
+// Simple GET route for root URL
+app.get('/', (req, res) => {
+  res.send('API is live. Please POST to /generate-image.');
+});
+
 app.post('/generate-image', async (req, res) => {
   const { prompt } = req.body;
 
