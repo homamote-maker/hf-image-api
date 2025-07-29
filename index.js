@@ -1,32 +1,26 @@
-require('dotenv').config(); // Load .env variables
-
+require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
 const app = express();
 app.use(express.json());
 
 app.post('/generate-image', async (req, res) => {
-  const { imageUrl } = req.body;
+  const { prompt } = req.body;
 
-  if (!imageUrl) {
-    return res.status(400).json({ error: 'Missing imageUrl in body' });
+  if (!prompt) {
+    return res.status(400).json({ error: 'Missing prompt in body' });
   }
 
   try {
     const hfResponse = await fetch(
-      'https://api-inference.huggingface.co/models/ilkerzgi/Overlay-Kontext-Dev-LoRA',
+      'https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-2-1',
       {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${process.env.HF_API_KEY}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          inputs: imageUrl,
-          parameters: {
-            prompt: 'make this image scary',
-          },
-        }),
+        body: JSON.stringify({ inputs: prompt }),
       }
     );
 
